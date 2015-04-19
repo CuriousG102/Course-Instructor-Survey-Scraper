@@ -54,8 +54,8 @@ class PublicCISSpider(scrapy.Spider):
                     '_was_college_school_average', '_was_uni_average')
 
         for j, criterion in enumerate(criteria):
-            i['instructor%s' % criterion] = secondRow.xpath('td[%d]/text()' % j + 2).extract()[0]
-            i['course%s' % criterion] = thirdRow.xpath('td[%d]/text()' % j + 2).extract()[0]
+            i['instructor%s' % criterion] = secondRow.xpath('td[%d]/text()' % (j + 2)).extract()[0]
+            i['course%s' % criterion] = thirdRow.xpath('td[%d]/text()' % (j + 2)).extract()[0]
 
         return i
 
