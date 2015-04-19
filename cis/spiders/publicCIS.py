@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import urlparse
+
 import scrapy
 
 from scrapy.http import FormRequest, Request
@@ -24,7 +26,7 @@ class PublicCISSpider(scrapy.Spider):
         table = response.selector.xpath('/html/body/div/div[3]/div[2]/table')
         cisResultLinks = table.css('.left-align').xpath('a/@href').extract()
         for link in cisResultLinks:
-            yield Request(link, 
+            yield Request(urlparse.urljoin(response.url, link), 
                           callback = self.surveyResult)
 
         if len(response.selector.xpath('//input[@value="Next page"]')) != 0:
@@ -56,7 +58,6 @@ class PublicCISSpider(scrapy.Spider):
             i['course%s' % criterion] = thirdRow.xpath('td[%d]/text()' % j + 2).extract()[0]
 
         return i
-
 
 
 
