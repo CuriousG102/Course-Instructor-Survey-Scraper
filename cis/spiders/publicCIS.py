@@ -31,7 +31,10 @@ class PublicCISSpider(scrapy.Spider):
 
         if len(response.selector.xpath('//input[@value="Next page"]')) != 0:
             yield FormRequest.from_response(response,
-                                            clickdata={'value':'Next page'},
+                                            formxpath='//div[@class="page-forward"]/form[1]',
+                                            formdata={'s_in_action_sw':'P',        # this shouldn't be necessary
+                                                      's_in_max_nbr_return':'0'},  # but scrapy has a bug that is causing
+                                                                                   # other form elements to enter 
                                             callback = self.resultsPage)
 
     def surveyResult(self, response):
