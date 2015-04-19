@@ -21,7 +21,7 @@ class CISItem(scrapy.Item):
     instructor_was_num_respondents = scrapy.Field()
     instructor_was_average = scrapy.Field()
     instructor_was_org_average = scrapy.Field()
-    intructor_was_college_school_average = scrapy.Field()
+    instructor_was_college_school_average = scrapy.Field()
     instructor_was_uni_average = scrapy.Field()
     course_was_num_respondents = scrapy.Field()
     course_was_average = scrapy.Field()
