@@ -31,7 +31,7 @@ class PublicCISSpider(scrapy.Spider):
 
         if len(response.selector.xpath('//input[@value="Next page"]')) != 0:
             yield FormRequest.from_response(response,
-                                            clickdata={'value':'Next Page'},
+                                            clickdata={'value':'Next page'},
                                             callback = self.resultsPage)
 
     def surveyResult(self, response):
