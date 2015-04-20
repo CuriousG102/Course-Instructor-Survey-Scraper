@@ -34,7 +34,7 @@ class PublicCISSpider(scrapy.Spider):
         if len(response.selector.xpath('//input[@value="Next page"]')) != 0:
             yield FormRequest.from_response(response,
                                             formxpath='//div[@class="page-forward"]/form[1]',
-                                            url = url_query_cleaner(response.url) # workaround for scrapy problem
+                                            url = url_query_cleaner(response.url), # workaround for scrapy problem
                                             callback = self.resultsPage)
 
     def surveyResult(self, response):
