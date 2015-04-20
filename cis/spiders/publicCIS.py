@@ -6,6 +6,8 @@ import scrapy
 from scrapy.http import FormRequest, Request
 from scrapy.selector import Selector
 
+from w3lib.url import url_query_cleaner
+
 from ..items import CISItem
 
 class PublicCISSpider(scrapy.Spider):
@@ -32,9 +34,7 @@ class PublicCISSpider(scrapy.Spider):
         if len(response.selector.xpath('//input[@value="Next page"]')) != 0:
             yield FormRequest.from_response(response,
                                             formxpath='//div[@class="page-forward"]/form[1]',
-                                            formdata={'s_in_action_sw':'P',        # this shouldn't be necessary
-                                                      's_in_max_nbr_return':'0'},  # but scrapy has a bug that is causing
-                                                                                   # other form elements to enter 
+                                            url = url_query_cleaner(response.url) # workaround for scrapy problem
                                             callback = self.resultsPage)
 
     def surveyResult(self, response):
